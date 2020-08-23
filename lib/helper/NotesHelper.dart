@@ -9,16 +9,21 @@ class NotesHelper {
     return _notesHelper;
   }
 
-  NotesHelper._internal() {}
+  NotesHelper._internal(){
+  }
 
   get db async {
     if (_db != null) {
       return _db;
-    } else {}
+    } else {
+      _db = await bootDB();
+      return _db;
+    }
   }
 
   _onCreate(Database db, int version) async {
-    String sql = "CREATE TABLE annotation (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR, description TEXT, data DATETIME)";
+    String sql =
+        "CREATE TABLE annotation (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR, description TEXT, data DATETIME)";
     await db.execute(sql);
   }
 
